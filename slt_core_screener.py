@@ -204,14 +204,12 @@ df = df.T.fillna(0)  ## dataframe with ESG scores
 # dictionary initialization to store results of the scoring
 results = dict.fromkeys(df.index, 0)
 
-# scoring calclation for all tickers in the ESG dataframe.
+# scoring calculation for all tickers in the ESG dataframe.
 
 for ticker in df.index:
     for col in df.columns:
 
-        if df[col][ticker] <= df[col].quantile(0.33):
-            results[ticker] += -1
-        elif df[col].quantile(0.33) < df[col][ticker] <= df[col].quantile(0.66):
+        if df[col][ticker] <= df[col].quantile(0.5):
             results[ticker] += 0
         else:
             results[ticker] += 1
